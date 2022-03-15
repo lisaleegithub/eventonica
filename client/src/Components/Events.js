@@ -48,6 +48,42 @@ const Events = () => {
                         placeholder="Virtual corgi meetup"
                     />
                 </fieldset>
+
+                <fieldset>
+                    <label>ID</label>
+                    <input
+                        type="number"
+                        id="add-event-number"
+                        placeholder=""
+                    />
+                </fieldset>
+
+                <fieldset>
+                    <label>Date</label>
+                    <input
+                        type="date"
+                        id="add-event-date"
+                        placeholder="2/2/2022"
+                    />
+                </fieldset>
+
+                <fieldset>
+                    <label>Description</label>
+                    <input
+                        type="text"
+                        id="add-event-description"
+                        placeholder="Meet doggos!"
+                    />
+                </fieldset>
+
+                <fieldset>
+                    <label>Category</label>
+                    <input
+                        type="text"
+                        id="add-event-category"
+                        placeholder="Celebration"
+                    />
+                </fieldset>
                 {/* Add more form fields here */}
                 <input type="submit" />
             </form>
