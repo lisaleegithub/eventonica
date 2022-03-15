@@ -1,14 +1,20 @@
 import React from 'react';
+import { useState } from 'react';
+
+// users data - eventually will store in a database
+const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
+const nemo = { name: 'Nemo', email: 'nemo@gmail.com', id: '2' };
+const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
 
 const Users = () => {
+    const [users, setUsers] = useState([marlin, nemo, dory])
 
     return (
     <section className="user-management">
         <h2>User Management</h2>
 
         <ul id="users-list">
-            {/* display all existing Users here */}
-            <li>...</li>
+            {users.map((user) => <li key={user.id}>{user.name} {user.email}</li>)}
         </ul>
 
         <div>
