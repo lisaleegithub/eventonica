@@ -2,6 +2,7 @@ import calendar from "./calendar.png";
 import "./App.css";
 import Footer from './Components/Footer';
 import Users from './Components/Users';
+import Events from './Components/Events';
 
 function App() {
   return (
@@ -16,30 +17,8 @@ function App() {
 
           <Users />
 
-          <section className="event-management">
-            <h2>Event Management</h2>
-            <div>
-              <h3>All Events</h3>
-              <ul id="events-list">
-                {/* Display all Events here */}
-                <li>...</li>
-              </ul>
+          <Events />
 
-              <h3>Add Event</h3>
-              <form id="add-event" action="#">
-                <fieldset>
-                  <label>Name</label>
-                  <input
-                    type="text"
-                    id="add-event-name"
-                    placeholder="Virtual corgi meetup"
-                  />
-                </fieldset>
-                {/* Add more form fields here */}
-                <input type="submit" />
-              </form>
-            </div>
-          </section>
         </div>
 
         <div>
