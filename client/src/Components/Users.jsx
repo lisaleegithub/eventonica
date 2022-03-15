@@ -1,5 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
+import DeleteUser from './DeleteUser';
 
 // users data - eventually will store in a database
 const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
@@ -12,8 +13,8 @@ const Users = () => {
     const [id, setId] = useState('')
     const [email, setEmail] = useState('')
 
+    // add the user object to the users list and reset input fields after submitting
     const handleSubmit = (e) => {
-        console.log("hello");
         e.preventDefault();
         const newUser = { id: id, name: name, email: email };
         setUsers([...users, newUser]);
@@ -21,6 +22,12 @@ const Users = () => {
         setId('');
         setEmail('');
     };
+
+    // delete the user object with the id from the users list
+    const handleDeleteUser = (deleteId) => {
+        const newUsers = users.filter((i) => i.id !== deleteId);
+        setUsers(newUsers);
+      };
 
     return (
     <section className="user-management">
@@ -32,7 +39,6 @@ const Users = () => {
 
         <div>
             <h3>Add User</h3>
-            {/* onSubmit added */}
             <form id="add-user" action="#" onSubmit={handleSubmit}>
                 <fieldset>
                     <label>Name</label>
@@ -58,16 +64,8 @@ const Users = () => {
             </form>
         </div>
 
-        <div>
-            <h3>Delete User</h3>
-            <form id="delete-user" action="#">
-                <fieldset>
-                    <label>User ID</label>
-                    <input type="number" id="delete-user-id" />
-                </fieldset>
-                <input type="submit" />
-            </form>
-        </div>
+        <DeleteUser handleDeleteUser={handleDeleteUser} />
+
     </section>
     )
 }
