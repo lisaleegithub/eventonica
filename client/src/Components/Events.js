@@ -1,4 +1,5 @@
 import React, { useState, useReducer } from "react";
+import DeleteEvent from "./DeleteEvent";
 
 // mock events
 const event1 = {
@@ -65,9 +66,16 @@ const Events = () => {
     const handleAddEvent = (e) => {
         e.preventDefault();
         setEvents([...events, state]);
-        console.log(state);
+        // console.log(state);
         }
     
+    // delete the event object with the id from the events list
+    const handleDeleteEvent = (deleteEvent) => {
+        const deleteEvents = events.filter((event) => event.id !== deleteEvent);
+        // console.log(deleteEvents);
+        setEvents(deleteEvents);
+    };
+
     return (
     <section className="event-management">
         <h2>Event Management</h2>
@@ -75,7 +83,7 @@ const Events = () => {
             <h3>All Events</h3>
 
             <ul id="events-list">
-                {events.map((event, index) => <li key={index}>{event.name} {event.date} {event.description} {event.category}</li>)} 
+                {events.map((event, index) => <li key={index}> Event ID: {event.id} <br/> {event.name} :  {event.description} <br/> Date: {event.date} <br/> Category: {event.category}</li>)} 
             </ul>
 
             <h3>Add Event</h3>
@@ -168,6 +176,7 @@ const Events = () => {
                 <input type="submit" />
             </form>
         </div>
+        <DeleteEvent handleDeleteEvent={handleDeleteEvent} />
     </section>
     )
 }
