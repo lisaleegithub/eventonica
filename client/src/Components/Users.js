@@ -1,18 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import DeleteUser from './DeleteUser';
 
-// // users data - eventually will store in a database
-// const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
-// const nemo = { name: 'Nemo', email: 'nemo@gmail.com', id: '2' };
-// const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
-
 const Users = () => {
     const [users, setUsers] = useState([]);
     const [name, setName] = useState('')
     const [id, setId] = useState('')
     const [email, setEmail] = useState('')
 
-    console.log('users', users);
+    // console.log('users', users);
 
     const getUsers = () => {
         fetch('http://localhost:4000/users')
@@ -26,16 +21,39 @@ const Users = () => {
         getUsers();
       }, []);
 
-
-    // add the user object to the users list and reset input fields after submitting
+    // addUser() adds new user to the users list
     const handleSubmit = (e) => {
         e.preventDefault();
-        const newUser = { id: id, name: name, email: email };
-        setUsers([...users, newUser]);
-        setName('');
-        setId('');
-        setEmail('');
+        addUser();
     };
+
+    const addUser = () => {
+        const newUser = { id: id, name: name, email: email };
+        fetch("http://localhost:4000/users", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            // body data type must match content-type
+            // convert to a JSON string
+            body: JSON.stringify(newUser),
+        })
+        // json() method of response returns a
+        // promise which resolves with the result of
+        // parsing the body text as JSON
+        .then(response => response.json())
+        .then(data => {
+        console.log('Success:', data);
+        // if success, do the following
+            setUsers([...users, newUser])
+            setName('');
+            setId('');
+            setEmail('');
+        })
+        .catch((error) => {
+        console.error('Error:', error);
+        });
+    }
 
     // delete the user object with the id from the users list
     const handleDeleteUser = (deleteId) => {

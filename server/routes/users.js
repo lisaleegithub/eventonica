@@ -18,4 +18,12 @@ router.get('/', function (req, res, next) {
   res.json({ users: mockUsers });
 });
 
+router.post('/', function (req, res, next) {
+    // save request data to a variable in routes/users.js
+    // console.log(req.body);
+    res.send(req.body);
+    // res.send('some message about your data being saved, and a copy of that data');
+  });
+
+
 module.exports = router;
