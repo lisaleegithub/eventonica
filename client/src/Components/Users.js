@@ -9,17 +9,24 @@ const Users = () => {
 
     // console.log('users', users);
 
-    const getUsers = () => {
-        fetch('http://localhost:4000/users')
-          .then((res) => res.json())
-          .then((res) => setUsers(res.users));
-      };
+    const getUsers = async () => {
+        const response = await fetch('http://localhost:4000/users');
+        const user = await response.json();
+        setUsers(user);
+    };
       
-      useEffect(() => {
+    // // another option for getUsers()
+    // const getUsers = () => {
+    //     fetch('http://localhost:4000/users')
+    //       .then((res) => res.json())
+    //       .then((res) => setUsers(res.users));
+    //   };
+
+    useEffect(() => {
         // useEffect will run getUsers() every time this component loads, 
         // as opposed to just the first time it is rendered.
         getUsers();
-      }, []);
+    }, []);
 
     // addUser() adds new user to the users list
     const handleSubmit = (e) => {
