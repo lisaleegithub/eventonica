@@ -1,17 +1,31 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import DeleteUser from './DeleteUser';
 
-// users data - eventually will store in a database
-const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
-const nemo = { name: 'Nemo', email: 'nemo@gmail.com', id: '2' };
-const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
+// // users data - eventually will store in a database
+// const marlin = { name: 'Marlin', email: 'marlin@gmail.com', id: '1' };
+// const nemo = { name: 'Nemo', email: 'nemo@gmail.com', id: '2' };
+// const dory = { name: 'Dory', email: 'dory@gmail.com', id: '3' };
 
 const Users = () => {
-    const [users, setUsers] = useState([marlin, nemo, dory])
+    const [users, setUsers] = useState([]);
     const [name, setName] = useState('')
     const [id, setId] = useState('')
     const [email, setEmail] = useState('')
+
+    console.log('users', users);
+
+    const getUsers = () => {
+        fetch('http://localhost:4000/users')
+          .then((res) => res.json())
+          .then((res) => setUsers(res.users));
+      };
+      
+      useEffect(() => {
+        // useEffect will run getUsers() every time this component loads, 
+        // as opposed to just the first time it is rendered.
+        getUsers();
+      }, []);
+
 
     // add the user object to the users list and reset input fields after submitting
     const handleSubmit = (e) => {
