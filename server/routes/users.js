@@ -44,6 +44,7 @@ router.post('/', async (req, res) => {
 router.delete("/:id", async (req, res) => {
   // : acts as a placeholder
   const userId = req.params.id;
+  console.log(userId);
   try {
     await db.none("DELETE FROM users WHERE id=$1", [userId]);
     res.send({ status: "success" });
@@ -70,6 +71,5 @@ router.delete("/:id", async (req, res) => {
 //     res.send(req.body);
 //     // res.send('some message about your data being saved, and a copy of that data');
 //   });
-
 
 module.exports = router;

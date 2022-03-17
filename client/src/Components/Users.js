@@ -7,7 +7,7 @@ const Users = () => {
     const [id, setId] = useState('')
     const [email, setEmail] = useState('')
 
-    // console.log('users', users);
+    console.log('users', users);
 
     const getUsers = async () => {
         const response = await fetch('http://localhost:4000/users');
@@ -45,28 +45,46 @@ const Users = () => {
             // convert to a JSON string
             body: JSON.stringify(newUser),
         })
-        // json() method of response returns a
-        // promise which resolves with the result of
-        // parsing the body text as JSON
-        .then(response => response.json())
-        .then(data => {
-        console.log('Success:', data);
-        // if success, do the following
-            setUsers([...users, newUser])
-            setName('');
-            setId('');
-            setEmail('');
-        })
-        .catch((error) => {
-        console.error('Error:', error);
-        });
+            // json() method of response returns a
+            // promise which resolves with the result of
+            // parsing the body text as JSON
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // if success, do the following
+                setUsers([...users, newUser])
+                setName('');
+                setId('');
+                setEmail('');
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
     }
 
     // delete the user object with the id from the users list
-    const handleDeleteUser = (deleteId) => {
-        const newUsers = users.filter((i) => i.id !== deleteId);
-        setUsers(newUsers);
-      };
+    const handleDeleteUser = (id) => {
+        deleteUser(id);
+    };
+
+    const deleteUser = (id) => {
+        fetch(`http://localhost:4000/users/${id}`, {
+            method: "DELETE",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Success:', data);
+                // if success, do the following
+                const newUsers = users.filter((i) => i.id !== id);
+                setUsers(newUsers);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+            });
+    }
 
     return (
     <section className="user-management">
