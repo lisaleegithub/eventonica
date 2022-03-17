@@ -38,6 +38,20 @@ router.post('/', async (req, res) => {
   }
 });
 
+/* Delete users listing. */
+//Parameterized queries use placeholders instead of directly writing the
+//values into the statements. Parameterized queries increase security and performance.
+router.delete("/:id", async (req, res) => {
+  // : acts as a placeholder
+  const userId = req.params.id;
+  try {
+    await db.none("DELETE FROM users WHERE id=$1", [userId]);
+    res.send({ status: "success" });
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
 // /* GET users listing. */
 // router.get('/', function(req, res, next) {
 //   res.send('respond with a resource');
