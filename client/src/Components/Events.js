@@ -1,4 +1,4 @@
-import React, { useState, useReducer } from "react";
+import React, { useState, useReducer, useEffect } from "react";
 import DeleteEvent from "./DeleteEvent";
 
 // create an initial state for the form reducer
@@ -37,6 +37,17 @@ const Events = () => {
     const [events, setEvents] = useState([]);
     // initialize the reducer that will store and update the form data
     const [state, dispatch] = useReducer(reducer, initialState);
+
+    const getEvents = () => {
+        fetch('http://localhost:4000/events')
+          .then((res) => res.json())
+          .then((res) => setEvents(res.events));
+      };
+      
+      useEffect(() => {
+        // useEffect will run getEvents() every time this component loads, as opposed to just the first time it is rendered.
+        getEvents();
+      }, []);
 
     const handleAddEvent = (e) => {
         e.preventDefault();
