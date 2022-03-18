@@ -1,31 +1,6 @@
 import React, { useState, useReducer } from "react";
 import DeleteEvent from "./DeleteEvent";
 
-// mock events
-const event1 = {
-    id: "1",
-    name: "Birthday",
-    date: "2021-09-01",
-    description: "A birthday party for my best friend",
-    category: "Celebration",
-  };
-  
-  const event2 = {
-    id: "2",
-    name: "Graduation",
-    date: "2021-08-01",
-    description: "The class of 2021 graduates from East High",
-    category: "Education",
-  };
-  
-  const event3 = {
-    id: "3",
-    name: "JS Study Session",
-    date: "2021-10-01",
-    description: "A chance to practice Javascript interview questions",
-    category: "Education",
-  };
-
 // create an initial state for the form reducer
 const initialState = {
     id: '',
@@ -59,7 +34,7 @@ const reducer = (state, action) => {
 
 const Events = () => {
     // create events state and initialize with mock events
-    const [events, setEvents] = useState([event1, event2, event3]);
+    const [events, setEvents] = useState([]);
     // initialize the reducer that will store and update the form data
     const [state, dispatch] = useReducer(reducer, initialState);
 
