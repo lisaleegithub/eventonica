@@ -15,9 +15,13 @@ function App() {
       <main>
         <div className="user-and-events">
 
+        <div className="users-column">
           <Users />
+        </div>
 
+        <div className="events-column">
           <Events />
+        </div>
 
         </div>
 

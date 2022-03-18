@@ -31,3 +31,15 @@ footer {
   font-size: small;
   color: gray;
 }
+
+.user-and-events {
+  display: flex;
+}
+
+.users-column {
+  width: 300px;
+}
+
+.events-column {
+  width: 400px;
+}
